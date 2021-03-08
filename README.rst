@@ -72,9 +72,9 @@ To create the repository:
 
 2. Click the "New" button to the right.
 
-3. Give the repository a name relevant to the doc (we haven't
-   formalized this yet) and create it.  It is preferred that you create
-   a *private* repository for design documents; these can be changed to
+3. Give the repository a name relevant to the doc (we haven't formalized
+   this yet) and create it.  It is preferred that you create a
+   **private** repository for design documents; these can be changed to
    public later.
 
 4. The above step creates an empty repository.  Follow the GitHub
