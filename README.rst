@@ -1,4 +1,11 @@
 
+FOBOS Documentation Template in LaTex
+-------------------------------------
+
+To start a new document:
+
+
+
 % From the heading of the FOBOS_Template.tex file:
 
 % Things you need to edit:
