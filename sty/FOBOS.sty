@@ -1,0 +1,283 @@
+\ProvidesPackage{sc_1000_001_01}
+%%
+%% This style file is intended for UCO/FOBOS Technical Group members who are writing their technical trade studies or design studies in LaTeX.
+%% It configures parameters used by the LaTeX memoir document class (see the manual memman.pdf)
+%% 
+
+
+%%% PAGE DIMENSIONS
+% Set up the paper to be as close as possible to both A4 & letter:
+% letter = 11in tall; a4 = 210mm wide
+\settrimmedsize{11in}{210mm}{*}
+\setlength{\trimtop}{0pt}
+\setlength{\trimedge}{\stockwidth}
+\addtolength{\trimedge}{-\paperwidth}
+\settypeblocksize{630pt}{36pc}{*}
+\setulmargins{72.27pt}{*}{*} % upper, lower, ratio
+\setlrmargins{84.27pt}{*}{*} % spine, edge, ratio
+\setmarginnotes{7pt}{72.27pt}{7pt}
+\checkandfixthelayout 
+
+%%% FONT CHOICES
+\usepackage[utf8]{inputenc}
+\usepackage[sc,osf]{mathpazo} % math & rm (Math and roman)
+\linespread{1.0345} % With 11 pt the baselineskip is 14.0692 pt.
+% And with textheight = 636.60028 pt gives 45.25 lines per page.
+%\usepackage[scaled]{helvet} % ss (sans)
+\usepackage{helvet}
+\renewcommand*\familydefault{\sfdefault}
+\usepackage[T1]{fontenc}
+%\fontfamily{lmss}\selectfont
+\normalfont
+%%% END Font choices
+
+%%% \maketitle CUSTOMISATION
+% Memior's author states we should use a titlepage environment for detailed changes
+% Use Roman font family instead of sans
+% \pretitle{\begin{center}\rmfamily\huge\MakeUppercase}
+% Can we manually set case?
+\pretitle{\begin{center}\rmfamily\huge}
+\posttitle{\par\end{center}\vskip 0.5em}
+
+%%% ToC APPEARANCE
+%% Short and Long ToC ideas taken from memsty.sty
+%\renewcommand{\cftchapterpagefont}{} % Not certain point of this.
+\newcommand*{\setupshorttoc}{%
+   \renewcommand*{\cftchapterfont}{\normalfont}
+   \renewcommand*{\cftchapterpagefont}{\normalfont}
+   \renewcommand{\contentsname}{Short Contents}
+   \maxtocdepth{chapter}
+}
+
+\newcommand*{\setupmaintoc}{%
+  %\renewcommand{\cftchapterfont}{} % Turns off bold for chapter level in ToC
+  \renewcommand*{\cftchapterfont}{\bfseries}
+  \renewcommand*{\cftchapterpagefont}{\bfseries}
+  \renewcommand{\contentsname}{Contents}
+  \maxtocdepth{subsection} 
+}
+
+% Change the name of the figure/table list
+\renewcommand{\listfigurename}{Figures}
+\renewcommand{\listtablename}{Tables}
+
+%%% HEADERS & FOOTERS
+% Change footer to display page of total pages
+\makeoddfoot{Ruled}{}{}{\thepage\ / \thelastpage}
+\makeevenfoot{Ruled}{\thepage\ / \thelastpage}{}{}
+
+%% Predefined options are
+%% empty , plain , headings , ruled , Ruled , companion
+\pagestyle{Ruled}
+
+
+%%% CHAPTERS
+%% Predefined options are
+%% default , section , hangnum , companion , article, demo
+%\chapterstyle{default} % Acceptable, but no distinction.
+\chapterstyle{hangnum} % I like this but would need to increase inner margin.
+%\chapterstyle{chappell} % I like this one. Uses more of page on chapter pages.
+%\chapterstyle{crosshead} % Acceptable. Good use of page. No 'Chapter'. Add line?
+
+
+% Set Roman family for chapter title font
+% Set Roman family for chapter number font
+%\renewcommand{\chaptitlefont}{\Huge\rmfamily\raggedright}
+%\renewcommand{\chapnumfont}{\Huge\rmfamily\raggedright}
+
+%%% SECTIONS
+% Hang the section numbers into the margin to match \chapterstyle{hangnum}
+% Set the section numbering to go to subsections
+\hangsecnum % I like this. Think need to increase inner margin.
+\maxsecnumdepth{subsection}
+
+% Set Roman family for section heading font
+% Set Roman family for subsection heading font
+%\setsecheadstyle{\Large\rmfamily\raggedright}
+%\setsubsecheadstyle{\large\rmfamily\raggedright}
+\setsecheadstyle{\Large\raggedright}
+\setsubsecheadstyle{\large\raggedright}
+
+
+%%% FIGURES
+\captiondelim{.~}% Seen in most books
+%\captiondelim{ -- }%en-dash
+\captionnamefont{\small\bfseries}
+\captiontitlefont{\small\itshape}
+%\postcaption{\rule{\linewidth}{0.4pt}}
+\newsubfloat{figure}
+%\subcaptionlabelfont{\normalsize\itshape}
+
+%%% END Memoir customise
+%%%
+
+%% OTHER: required for style documents
+\usepackage{graphicx}
+\usepackage{url}
+\usepackage{microtype} %Can only use with pdflatex
+\usepackage[usenames]{color}
+\usepackage{textcomp}
+\usepackage{hyperref}
+
+%% BIB
+\usepackage{natbib}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+%% CUSTOM Commands
+\newcommand{\tus}{\textunderscore}
+
+% Some fancy commenting
+\definecolor{todo}{RGB}{200,0,0}
+\newcommand{\edit}[2][todo]{{\color{#1}[[{\bf #2}]]}}
+
+%% Requirement lists
+% Thanks to:
+%
+% https://tex.stackexchange.com/questions/28593/how-to-create-a-custom-list-and-item-element
+
+\usepackage{paralist}   % load paralist BEFORE enumitem
+\usepackage{enumitem}
+\usepackage{keyval}
+
+\makeatletter
+\define@key{fobosreq}{prefix}{\def\reqprefix{#1}}
+\define@key{fobosreq}{start}{\setcounter{thiscnt}{#1}}
+\makeatother
+
+\newcounter{thiscnt}
+
+\newlist{requirement*}{enumerate}{1}
+\setlist[requirement*]{label={\bfseries \reqprefix~\reqopt.\arabic{thiscnt}}:~,
+                       ref={\bfseries \reqprefix~\reqopt.\arabic{thiscnt}}}
+\makeatletter
+\let\reqopt\relax
+\newcommand\reqitem[1][]{%
+  \refstepcounter{thiscnt}%
+  \if\relax\detokenize{#1}\relax
+    \def\reqopt{\thechapter}%
+  \else
+    \def\reqopt{#1}%
+  \fi
+    \item\relax}
+\makeatother
+
+\newcounter{reqcnt}
+\newenvironment{requirement}[1][]
+  {\setkeys{fobosreq}{start=\arabic{reqcnt},prefix=R}%change here your default prefix
+   \setkeys{fobosreq}{#1}%
+   \begin{requirement*}}
+  {\setcounter{reqcnt}{\arabic{thiscnt}}%
+   \end{requirement*}}
+
+\newcounter{scicnt}
+\newenvironment{sciencerequirement}[1][]
+  {\setkeys{fobosreq}{start=\arabic{scicnt},prefix=S}%change here your default prefix
+   \setkeys{fobosreq}{#1}%
+   \begin{requirement*}}
+  {\setcounter{scicnt}{\arabic{thiscnt}}%
+   \end{requirement*}}
+
+\newcounter{datcnt}
+\newenvironment{datarequirement}[1][]
+  {\setkeys{fobosreq}{start=\arabic{datcnt},prefix=D}%change here your default prefix
+   \setkeys{fobosreq}{#1}%
+   \begin{requirement*}}
+  {\setcounter{datcnt}{\arabic{thiscnt}}%
+   \end{requirement*}}
+
+\newcounter{procnt}
+\newenvironment{programrequirement}[1][]
+  {\setkeys{fobosreq}{start=\arabic{procnt},prefix=P}%change here your default prefix
+   \setkeys{fobosreq}{#1}%
+   \begin{requirement*}}
+  {\setcounter{procnt}{\arabic{thiscnt}}%
+   \end{requirement*}}
+
+
+
+% Pulled from
+%
+% https://github.com/AASJournals/AASTeX60/blob/master/cls/aastex63.cls
+%
+% on 8 July 2020.
+%
+% Changed all "renewcommand" calls to "newcommand".
+\makeatletter
+\let\jnl@style=\rmfamily 
+\def\ref@jnl#1{{\jnl@style#1}}% 
+\newcommand\aj{\ref@jnl{AJ}}%        % Astronomical Journal 
+\newcommand\araa{\ref@jnl{ARA\&A}}%  % Annual Review of Astron and Astrophys 
+\newcommand\apj{\ref@jnl{ApJ}}%    % Astrophysical Journal 
+\newcommand\apjl{\ref@jnl{ApJL}}     % Astrophysical Journal, Letters 
+\newcommand\apjs{\ref@jnl{ApJS}}%    % Astrophysical Journal, Supplement 
+\newcommand\ao{\ref@jnl{ApOpt}}%   % Applied Optics 
+\newcommand\apss{\ref@jnl{Ap\&SS}}%  % Astrophysics and Space Science 
+\newcommand\aap{\ref@jnl{A\&A}}%     % Astronomy and Astrophysics 
+\newcommand\aapr{\ref@jnl{A\&A~Rv}}%  % Astronomy and Astrophysics Reviews 
+\newcommand\aaps{\ref@jnl{A\&AS}}%    % Astronomy and Astrophysics, Supplement 
+\newcommand\azh{\ref@jnl{AZh}}%       % Astronomicheskii Zhurnal 
+\newcommand\baas{\ref@jnl{BAAS}}%     % Bulletin of the AAS 
+\newcommand\icarus{\ref@jnl{Icarus}}% % Icarus
+\newcommand\jaavso{\ref@jnl{JAAVSO}}  % The Journal of the American Association of Variable Star Observers
+\newcommand\jrasc{\ref@jnl{JRASC}}%   % Journal of the RAS of Canada 
+\newcommand\memras{\ref@jnl{MmRAS}}%  % Memoirs of the RAS 
+\newcommand\mnras{\ref@jnl{MNRAS}}%   % Monthly Notices of the RAS 
+\newcommand\pra{\ref@jnl{PhRvA}}% % Physical Review A: General Physics 
+\newcommand\prb{\ref@jnl{PhRvB}}% % Physical Review B: Solid State 
+\newcommand\prc{\ref@jnl{PhRvC}}% % Physical Review C 
+\newcommand\prd{\ref@jnl{PhRvD}}% % Physical Review D 
+\newcommand\pre{\ref@jnl{PhRvE}}% % Physical Review E 
+\newcommand\prl{\ref@jnl{PhRvL}}% % Physical Review Letters 
+\newcommand\pasp{\ref@jnl{PASP}}%     % Publications of the ASP 
+\newcommand\pasj{\ref@jnl{PASJ}}%     % Publications of the ASJ 
+\newcommand\qjras{\ref@jnl{QJRAS}}%   % Quarterly Journal of the RAS 
+\newcommand\skytel{\ref@jnl{S\&T}}%   % Sky and Telescope 
+\newcommand\solphys{\ref@jnl{SoPh}}% % Solar Physics 
+\newcommand\sovast{\ref@jnl{Soviet~Ast.}}% % Soviet Astronomy 
+\newcommand\ssr{\ref@jnl{SSRv}}% % Space Science Reviews 
+\newcommand\zap{\ref@jnl{ZA}}%       % Zeitschrift fuer Astrophysik 
+\newcommand\nat{\ref@jnl{Nature}}%  % Nature 
+\newcommand\iaucirc{\ref@jnl{IAUC}}% % IAU Cirulars 
+\newcommand\aplett{\ref@jnl{Astrophys.~Lett.}}%  % Astrophysics Letters 
+\newcommand\apspr{\ref@jnl{Astrophys.~Space~Phys.~Res.}}% % Astrophysics Space Physics Research 
+\newcommand\bain{\ref@jnl{BAN}}% % Bulletin Astronomical Institute of the Netherlands 
+\newcommand\fcp{\ref@jnl{FCPh}}%   % Fundamental Cosmic Physics 
+\newcommand\gca{\ref@jnl{GeoCoA}}% % Geochimica Cosmochimica Acta 
+\newcommand\grl{\ref@jnl{Geophys.~Res.~Lett.}}%  % Geophysics Research Letters 
+\newcommand\jcp{\ref@jnl{JChPh}}%     % Journal of Chemical Physics 
+\newcommand\jgr{\ref@jnl{J.~Geophys.~Res.}}%     % Journal of Geophysics Research 
+\newcommand\jqsrt{\ref@jnl{JQSRT}}%   % Journal of Quantitiative Spectroscopy and Radiative Trasfer 
+\newcommand\memsai{\ref@jnl{MmSAI}}% % Mem. Societa Astronomica Italiana 
+\newcommand\nphysa{\ref@jnl{NuPhA}}%     % Nuclear Physics A 
+\newcommand\physrep{\ref@jnl{PhR}}%       % Physics Reports 
+\newcommand\physscr{\ref@jnl{PhyS}}%        % Physica Scripta 
+\newcommand\planss{\ref@jnl{Planet.~Space~Sci.}}%  % Planetary Space Science 
+\newcommand\procspie{\ref@jnl{Proc.~SPIE}}%      % Proceedings of the SPIE 
+\newcommand\actaa{\ref@jnl{AcA}}%  % Acta Astronomica
+\newcommand\caa{\ref@jnl{ChA\&A}}%  % Chinese Astronomy and Astrophysics
+\newcommand\cjaa{\ref@jnl{ChJA\&A}}%  % Chinese Journal of Astronomy and Astrophysics
+\newcommand\jcap{\ref@jnl{JCAP}}%  % Journal of Cosmology and Astroparticle Physics
+\newcommand\na{\ref@jnl{NewA}}%  % New Astronomy
+\newcommand\nar{\ref@jnl{NewAR}}%  % New Astronomy Review
+\newcommand\pasa{\ref@jnl{PASA}}%  % Publications of the Astron. Soc. of Australia
+\newcommand\rmxaa{\ref@jnl{RMxAA}}%  % Revista Mexicana de Astronomia y Astrofisica
+%% added feb 9, 2016
+\newcommand\maps{\ref@jnl{M\&PS}}% Meteoritics and Planetary Science
+\newcommand\aas{\ref@jnl{AAS Meeting Abstracts}}% American Astronomical Society Meeting Abstracts
+\newcommand\dps{\ref@jnl{AAS/DPS Meeting Abstracts}}% American Astronomical Society/Division for Planetary Sciences Meeting Abstracts
+\let\astap=\aap 
+\let\apjlett=\apjl 
+\let\apjsupp=\apjs 
+\let\applopt=\ao 
+\makeatother
+
+
+
+
+
+
+
+
+
+

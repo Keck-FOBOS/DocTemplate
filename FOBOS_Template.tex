@@ -1,0 +1,170 @@
+\documentclass[11pt,a4paper,twoside,onecolumn,openany,final,oldfontcommands]{memoir}
+\usepackage{sty/FOBOS}  % FOBOS SDN style file
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Things you need to edit:
+%   - Document name, numbering, and date; edit the newcommands below.
+%   - Authors list; see authors.tex
+%   - The contact information for the corresponding author; see corresponding.tex
+%   - Any (additional) tex aliases you would like to include; see aliases.tex
+%   - BibTex references are included using ref.bib
+%   - Main body of the document
+%   - Add a line to the revision history
+
+\newcommand{\doclongname}{Long Document Name}
+\newcommand{\docshortname}{Document abbreviation; e.g., LDN}
+
+\newcommand{\project}{FOBOS}
+\newcommand{\wbs}{WBS}
+\newcommand{\doctype}{DOC}
+\newcommand{\docnumber}{001}
+
+% Pre-release versions are 0A - ZZ; Release versions should be 01-99
+\newcommand{\docversion}{0A}
+\newcommand{\docreleaseDate}{2020-07-08}  % Please use ISO-8601 YYYY-MM-DD format.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Document Designation Number
+\newcommand{\docsysnum}{{\project}.{\wbs}.{\doctype}.{\docnumber}.V{\docversion}}
+
+%% Set footers to use document info
+%% ================================
+\makeoddfoot{Ruled}{\docsysnum}{}{\thepage\ / \thelastpage}
+\makeevenfoot{Ruled}{\thepage\ / \thelastpage}{}{\docsysnum}
+
+%%% Packages for TESTING
+\usepackage{lipsum}
+\listfiles
+
+%% ALIASES
+\input{aliases}
+
+%%%% BEGIN DOCUMENT
+\begin{document}
+\bibliographystyle{sty/aasjournal}
+
+%%% FRONTMATTER
+\frontmatter
+\input{title}
+\thispagestyle{empty}  % Title page has no page number shown.
+
+\clearpage
+\setupmaintoc
+\tableofcontents 
+
+\clearpage
+\listoffigures
+
+%: PREFACE
+\chapter{Corresponding Author}
+%
+\input{corresponding}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% The rest of the document editing begins here
+
+%-----------------------------------------------------------------------
+% Executive Summary
+\chapter{Executive Summary}
+
+This is the template for FOBOS design documents.
+
+%-----------------------------------------------------------------------
+
+
+%-----------------------------------------------------------------------
+% Main document body
+\mainmatter
+
+% Introduction
+\chapter{Introduction}
+
+Here is a reference: \citet{2019BAAS...51g.198B}.
+
+% Chapter
+\chapter{Examples}
+
+Because many of the documents are versioned using git, we need to adopt some practices that ease/enable the git merging.  Generally, try to keep paragraphs on a single line, like this one.  Also try to keep other text-editor-specific changes to the format of the text to a minimum (e.g., keep items in a list on a single line, figure captions, table captions, etc).  Regardless, when editing off Overleaf, make sure that you check the merging from/to the main repository to ensure your edits are correctly integrated.
+
+The main document style is set to {\ttfamily memoir}, which has a few
+modifications for lists.  Two examples are shown below.  Particularly
+note the use of the comment character and how this affects the spacing
+between the list and the adjoining paragraph.
+
+\tightlists
+\begin{enumerate}
+%
+\item Enumerated item in {\ttfamily memoir}, with
+%
+\item tight lists.
+%
+\end{enumerate}
+%
+Please also consider using {\ttfamily paralist} (already in package listing above).  The following {\ttfamily paralist} enumerated environments are useful:
+\begin{inparaenum}[(a)]
+%
+\item asparaenum
+%
+\item inparaenum, and
+%
+\item compactenum.
+%
+\end{inparaenum}
+%
+The itemized versions are also useful:
+%
+\begin{asparaitem}
+%
+\item asparaitem
+%
+\item inparaitem
+%
+\item compactitem
+%
+\end{asparaitem}
+%
+Note that the fonts for the equations are different than the text.  These font changes are handled in the {\ttfamily FOBOS.sty} file.  Here is an inline equation --- $E=mc^2$ --- and here is the same one but isolated and numbered:
+%
+\begin{equation}
+E = m c^2
+\end{equation}
+
+\section{Section}
+
+Here is a section of this chapter.  Note how it is enumerated here and in the table of contents.
+
+\subsection{Sub-section}
+
+Subsections also appear in the table of contents.
+
+\paragraph{Test}
+
+There is no {\ttfamily subsubsection}; use {\ttfamily paragraph} instead (if necessary).  The paragraphs just have bold text that provides the paragraph title and then the rest of the paragraph is normal, including the indentation.
+
+\newpage
+
+%% Chapter
+\chapter*{Revision History}
+\addcontentsline{toc}{chapter}{Revision History}
+
+\begin{table}[hp]{%
+\begin{tabular}{l | l | l |  p{22pc}} \toprule
+{\bf Version} & {\bf Date} & {\bf Editor} & {\bf Comments} \\ \midrule
+% Insert your own version number with the date, your name, and a short
+% description of this version of the document.
+0A & 2020-07-08 & Kyle Westfall & Initial version \\ \bottomrule
+\end{tabular}}
+\end{table}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\bibliography{ref}
+
+\end{document}
+
+
