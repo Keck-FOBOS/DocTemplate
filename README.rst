@@ -9,40 +9,40 @@ FOBOS Documentation Template in LaTex
 
 To start a new document:
 
-    1. Checkout the repository into a directory named after the document
-       you're writing:
+1. Checkout the repository into a directory named after the document
+   you're writing:
 
-        .. code-block::
+    .. code-block::
 
-            git clone https://github.com/Keck-FOBOS/LaTexDocTemplate.git ${DocName}
+        git clone https://github.com/Keck-FOBOS/LaTexDocTemplate.git ${DocName}
 
-    2. Remove the git infrastructure, ensuring that edits you make are
-       not pushed to the template doc.  **To create a new repo for this
-       document and to link it in Overleaf, see below.**
+2. Remove the git infrastructure, ensuring that edits you make are not
+   pushed to the template doc.  **To create a new repo for this document
+   and to link it in Overleaf, see below.**
 
-        .. code-block::
+    .. code-block::
 
-            cd ${DocName}
-            rm -fR .git
+        cd ${DocName}
+        rm -fR .git
 
-    3. Change the name of the main document file:
+3. Change the name of the main document file:
 
-        .. code-block::
+    .. code-block::
 
-            mv FOBOS_Template.tex FOBOS-${DocName}.tex
+        mv FOBOS_Template.tex FOBOS-${DocName}.tex
 
-    4. In ``FOBOS-${DocName}.tex``, edit the document name, numbering,
-       and date.  This also contains the main text of the document and
-       the revision history.
+4. In ``FOBOS-${DocName}.tex``, edit the document name, numbering, and
+   date.  This also contains the main text of the document and the
+   revision history.
 
-    5. Edit the author list in ``authors.tex``.
+5. Edit the author list in ``authors.tex``.
 
-    6. Edit the contact information for the corresponding author in
-       ``corresponding.tex``.
+6. Edit the contact information for the corresponding author in
+   ``corresponding.tex``.
 
-    7. Add any (additional) tex aliases you want to ``aliases.tex``.
+7. Add any (additional) tex aliases you want to ``aliases.tex``.
 
-    8. Include any ``BibTex`` references in ``ref.bib``.
+8. Include any ``BibTex`` references in ``ref.bib``.
 
 
 For an example FOBOS design document, see the `ScienceRequirements`_
