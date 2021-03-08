@@ -68,20 +68,19 @@ organization repository.  To get access, e-mail `Kyle Westfall`_.
 
 To create the repository:
 
-    1. Go to: https://github.com/Keck-FOBOS
+ 1. Go to: https://github.com/Keck-FOBOS
 
-    2. Click the "New" button to the right.
+ 2. Click the "New" button to the right.
 
-    3. Give the repository a name relevant to the doc (we haven't
-       formalized this yet) and create it.  It is preferred that you create a *private* repository for design documents; these can be changed to public later.
+ 3. Give the repository a name relevant to the doc (we haven't
+    formalized this yet) and create it.  It is preferred that you create
+    a *private* repository for design documents; these can be changed to
+    public later.
 
-    4. The above step creates an empty repository.  Follow the GitHub
-       instructions for adding the relevant LaTex files for you doc.  Do
-       not add ancillary compilation files!  And take care not to add
-       excessively large files.
-
-    5. 
-
+ 4. The above step creates an empty repository.  Follow the GitHub
+    instructions for adding the relevant LaTex files for you doc.  Do
+    not add ancillary compilation files!  And take care not to add
+    excessively large files.
 
 
 
