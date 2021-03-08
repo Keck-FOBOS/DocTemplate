@@ -20,11 +20,13 @@
 
 %%% FONT CHOICES
 \usepackage[utf8]{inputenc}
-\usepackage[sc,osf]{mathpazo} % math & rm (Math and roman)
+%\usepackage[sc,osf]{mathpazo} % math & rm (Math and roman)
 \linespread{1.0345} % With 11 pt the baselineskip is 14.0692 pt.
 % And with textheight = 636.60028 pt gives 45.25 lines per page.
 %\usepackage[scaled]{helvet} % ss (sans)
-\usepackage{helvet}
+\usepackage[scaled=1]{helvet}
+\usepackage[helvet]{sfmath}
+%\everymath={\sf}
 \renewcommand*\familydefault{\sfdefault}
 \usepackage[T1]{fontenc}
 %\fontfamily{lmss}\selectfont
@@ -129,7 +131,7 @@
 
 % Some fancy commenting
 \definecolor{todo}{RGB}{200,0,0}
-\newcommand{\edit}[2][todo]{{\color{#1}[[{\bf #2}]]}}
+\newcommand{\edit}[2][todo]{{\color{#1}[[\textbf{#2}]]}}
 
 %% Requirement lists
 % Thanks to:
@@ -149,7 +151,9 @@
 
 \newlist{requirement*}{enumerate}{1}
 \setlist[requirement*]{label={\bfseries \reqprefix~\reqopt.\arabic{thiscnt}}:~,
-                       ref={\bfseries \reqprefix~\reqopt.\arabic{thiscnt}}}
+                       ref={\bfseries \reqprefix~\reqopt.\arabic{thiscnt}},
+                       itemsep=2pt, parsep=0pt, topsep=2pt, partopsep=0pt,
+                       leftmargin=0.7in}
 \makeatletter
 \let\reqopt\relax
 \newcommand\reqitem[1][]{%
@@ -195,7 +199,6 @@
    \end{requirement*}}
 
 
-
 % Pulled from
 %
 % https://github.com/AASJournals/AASTeX60/blob/master/cls/aastex63.cls
@@ -203,6 +206,13 @@
 % on 8 July 2020.
 %
 % Changed all "renewcommand" calls to "newcommand".
+
+\newcommand{\RN}[1]{%
+  \textup{\uppercase\expandafter{\romannumeral#1}}%
+}
+
+\newcommand\ion[2]{#1$\;${\rmfamily\RN{#2}}\relax}%
+
 \makeatletter
 \let\jnl@style=\rmfamily 
 \def\ref@jnl#1{{\jnl@style#1}}% 
