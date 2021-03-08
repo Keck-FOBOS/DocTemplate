@@ -3,6 +3,7 @@
 .. _Kyle Westfall: westfall@ucolick.org
 .. _ScienceRequirements: https://github.com/Keck-FOBOS/ScienceRequirements
 .. _FOBOS Document Structure: https://uco.atlassian.net/wiki/spaces/FOB/pages/405700609/Document+Structure
+.. _Overleaf: https://www.overleaf.com
 
 FOBOS Documentation Template in LaTex
 -------------------------------------
@@ -82,5 +83,7 @@ To create the repository:
    not add ancillary compilation files!  And take care not to add
    excessively large files.
 
+5. To link to an Overleaf document, go to `Overleaf`_, click the "New
+   Project" button, and choose the "Import from GitHub" option.
 
 
