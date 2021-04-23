@@ -72,6 +72,8 @@
 %% empty , plain , headings , ruled , Ruled , companion
 \pagestyle{Ruled}
 
+%% Do not reset the footnote counter for new chapters
+\counterwithout{footnote}{chapter}
 
 %%% CHAPTERS
 %% Predefined options are
@@ -123,6 +125,11 @@
 \usepackage{threeparttable}
 \usepackage{caption}
 \usepackage[hang,flushmargin]{footmisc}
+\usepackage{longtable}
+
+% Date
+\usepackage[yyyymmdd]{datetime}
+\renewcommand{\dateseparator}{--}
 
 %% BIB
 \usepackage{natbib}
@@ -162,7 +169,8 @@
 \newcommand\reqitem[1][]{%
   \refstepcounter{thiscnt}%
   \if\relax\detokenize{#1}\relax
-    \def\reqopt{\thechapter}%
+%    \def\reqopt{\thechapter}%
+    \def\reqopt{\arabic{section}}%
   \else
     \def\reqopt{#1}%
   \fi
